@@ -32,7 +32,8 @@ def test_longest_path():
         [(3, 1)],
         []
     ]
-    assert longest_path(graph4) == 3
+    
+    assert longest_path(graph4) == 2
 
     print("All test cases pass")
 

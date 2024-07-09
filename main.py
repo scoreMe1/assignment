@@ -1,8 +1,7 @@
 
 ### 2. `main.py`
 
-```python
-"""
+"""python
 Assignment: Implement the most efficient algorithm to solve the given problem.
 
 Problem Statement:
@@ -32,16 +31,52 @@ Example:
 7
 """
 
+from collections import deque
+
 def longest_path(graph: list) -> int:
-    # Your implementation goes here
-    pass
+    n = len(graph)
+    topo_order = topological_sort(graph)
+    dp = [-float('inf')] * n
+    
+    for node in topo_order:
+        if dp[node] == -float('inf'):
+            dp[node] = 0
+        for neighbor, weight in graph[node]:
+            dp[neighbor] = max(dp[neighbor], dp[node] + weight)
+    
+    longest_path_length = max(dp)
+    return longest_path_length
 
-# Helper function to perform topological sort
 def topological_sort(graph):
-    # Your implementation goes here
-    pass
+    n = len(graph)
+    in_degree = [0] * n
+    for node in range(n):
+        for neighbor, _ in graph[node]:
+            in_degree[neighbor] += 1
 
-# Function to calculate longest path using topological sort
+    queue = deque([i for i in range(n) if in_degree[i] == 0])
+    topo_order = []
+
+    while queue:
+        node = queue.popleft()
+        topo_order.append(node)
+        for neighbor, _ in graph[node]:
+            in_degree[neighbor] -= 1
+            if in_degree[neighbor] == 0:
+                queue.append(neighbor)
+
+    return topo_order
+
 def calculate_longest_path(graph, topo_order):
-    # Your implementation goes here
-    pass
+    n = len(graph)
+    dp = [-float('inf')] * n
+    
+    for node in topo_order:
+        if dp[node] == -float('inf'):
+            dp[node] = 0 
+        for neighbor, weight in graph[node]:
+            dp[neighbor] = max(dp[neighbor], dp[node] + weight)
+    
+    longest_path_length = max(dp)
+    return longest_path_length
+

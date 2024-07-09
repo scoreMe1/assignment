@@ -39,3 +39,6 @@ Output:
 
 Explanation:
 The longest path is from node 0 -> node 1 -> node 3 with a total weight of 3 + 4 = 7.
+
+<ins>*Note*</ins>
+Test Case 4 Has been Changed with assert = 2 as the longest Path Cannot be 3 due to the nature of the Graph
